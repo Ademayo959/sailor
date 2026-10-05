@@ -81,13 +81,58 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="gris grid-cols-2 max-w-5xl mx-auto my-20">
+      <div className="grid grid-cols-2 max-w-6xl mx-auto my-20">
         <div>
-          <p className="font-display text-[3.5rem] w-100 leading-14"><span>Hours of portfolio work,</span><span className="italic">done in seconds</span></p>
+          <p className="font-display text-[4rem] w-100 leading-16"><span>Hours of portfolio work,</span><span className="italic">done in seconds</span></p>
           <p className="font-sans text-[1.2rem] w-130 my-4">No templates to fill in. Sailor reads your public work and builds the page for you.</p>
         </div>
         <div>
-
+          <div className="border-t border-muted/20 py-5 flex gap-2">
+            <div>
+              <p className="font-mono text-muted/80 font-semibold mt-2">01</p>
+            </div>
+            <div>
+              <p className="font-display text-[2rem]">Paste your username</p>
+              <p className="font-sans">No signup needed to preview your page.</p>
+            </div>
+          </div>
+          <div className="border-t border-muted/20 py-5 flex gap-2">
+            <div>
+              <p className="font-mono text-muted/80 font-semibold mt-2">02</p>
+            </div>
+            <div>
+              <p className="font-display text-[2rem]">We read your public repos</p>
+              <p className="font-sans">Languages, Activity, collaboration and README quality.</p>
+            </div>
+          </div>
+          <div className="border-t border-muted/20 py-5 flex gap-2">
+            <div>
+              <p className="font-mono text-muted/80 font-semibold mt-2">03</p>
+            </div>
+            <div>
+              <p className="font-display text-[2rem]">Your score and rank appear</p>
+              <p className="font-sans">Four signals, explained line by line.</p>
+            </div>
+          </div>
+          <div className="border-t border-muted/20 py-5 flex gap-2">
+            <div>
+              <p className="font-mono text-muted/80 font-semibold mt-2">04</p>
+            </div>
+            <div>
+              <p className="font-display text-[2rem]">Share one link</p>
+              <p className="font-sans">For recruiters, internships and applications.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="max-w-6xl mx-auto">
+        <p className="text-[4rem] font-display justify-self-center">Everything a recruiter <span className="italic">looks for.</span></p>
+        <div className="grid grid-cols-3">
+          <div>
+            <div className="border border-muted/50 py-1 px-3 rounded-2xl w-fit">
+              <p className="text-[0.8rem]"></p>
+            </div>
+          </div>
         </div>
       </div>
 
