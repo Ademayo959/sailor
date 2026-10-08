@@ -12,7 +12,7 @@ export default function Navbar() {
             <div className="flex font-sans text-ink/90 gap-4 max-sm:hidden">
                 <Link href="/scoring" className="cursor-pointer">How scoring works</Link>
                 <p className="cursor-pointer">Ranks</p>
-                <p className="cursor-pointer">FAQ</p>
+                <Link href="/faqs" className="cursor-pointer">FAQ</Link>
             </div>
             <div className="bg-ink flex px-4 text-white h-full rounded-full items-center cursor-pointer transition-all duration-500 hover:bg-card hover:border hover:border-ink hover:text-ink">
                 <p className="max-sm:text-[0.9rem]">Sign in with Github</p>

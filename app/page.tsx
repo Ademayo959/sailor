@@ -1,3 +1,7 @@
+"use client"
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
@@ -5,6 +9,14 @@ import profile from "@/assets/profile.png"
 import Footer from "@/components/Footer";
 
 export default function Home() {
+  const [username, setUsername] = useState("")
+  const router = useRouter()
+
+   const goToProfile = () => {
+    const trimmed = username.trim();
+    if (!trimmed) return;
+    router.push(`/${encodeURIComponent(trimmed)}`);
+  };
   return (
     <div className="bg-cream h-full">
       <Navbar />
@@ -18,10 +30,10 @@ export default function Home() {
         <div className="mt-4">
           <p className="text-semibold font-sans text-muted text-[1.25rem] w-xl justify-self-center max-sm:text-[1.1rem] max-sm:w-full max-sm:px-2">Type a username. Get a clean portfolio page and a Sailor Score that shows how you actually build.</p>
           <div className="bg-card max-w-2xl mt-6 pl-6 py-2 pr-2 h-14 shadow-md justify-between flex rounded-full mx-auto my-3 max-sm:pl-4 max-sm:h-12">
-            <input type="text" placeholder="github.com/ username" className="w-[70%] font-sans outline-0 placeholder:text-muted max-sm:w-full" />
-            <div className="bg-olive w-fit px-5 py-2 text-white rounded-full cursor-pointer max-sm:px-3 max-sm:py-1 flex items-center">
+            <input value={username} onChange={(e) => setUsername(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && goToProfile()} type="text" placeholder="github.com/ username" className="w-[70%] font-sans outline-0 placeholder:text-muted max-sm:w-full" />
+            <button onClick={goToProfile} disabled={!username.trim()} className="bg-olive w-fit px-5 py-2 text-white rounded-full cursor-pointer max-sm:px-3 max-sm:py-1 flex items-center">
               <p className="font-sans max-sm:text-[0.8rem] whitespace-nowrap">See my Sailor profile</p>
-            </div>
+            </button>
           </div>
         </div>
         <p className="text-[0.9rem] text-muted">[895] developers already charted</p>
