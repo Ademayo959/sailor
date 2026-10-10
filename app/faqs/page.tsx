@@ -25,6 +25,83 @@ export default function page() {
           </div>
         </div>
       </div>
+      <div className="max-w-4xl mx-auto">
+        <div>
+          <p className="text-orange font-mono font-semibold my-2">GETTING STARTED</p>
+          <div>
+            <div className="border-t border-muted/20 py-5 flex gap-2">
+              <div>
+                <p className="font-display text-[2rem]">Do I need to sign up?</p>
+                <p className="font-sans text-muted">No. Enter a username to preview your page. Sign up with Github to publish and edit.</p>
+              </div>
+            </div>
+            <div className="border-t border-muted/20 py-5 flex gap-2">
+              <div>
+                <p className="font-display text-[2rem]">Is sailor free?</p>
+                <p className="font-sans text-muted">Yes, it's free.</p>
+              </div>
+            </div>
+            <div className="border-t border-muted/20 py-5 flex gap-2">
+              <div>
+                <p className="font-display text-[2rem]">Who can see my page?</p>
+                <p className="font-sans text-muted">Only people you share the link with. You can uppublish it whenever you like</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p className="text-orange font-mono font-semibold my-2">SCORING</p>
+          <div>
+            <div className="border-t border-muted/20 py-5 flex gap-2">
+              <div>
+                <p className="font-display text-[2rem]">How is my score worked out?</p>
+                <p className="font-sans text-muted">No. Enter a username to preview. Sign up with Github to publish and edit.</p>
+              </div>
+            </div>
+            <div className="border-t border-muted/20 py-5 flex gap-2">
+              <div>
+                <p className="font-display text-[2rem]">Can I cheat my score?</p>
+                <p className="font-sans text-muted">Private work only counts if you opt to share it with Github.</p>
+              </div>
+            </div>
+            <div className="border-t border-muted/20 py-5 flex gap-2">
+              <div>
+                <p className="font-display text-[2rem]">Why is my score lower than my real effort?</p>
+                <p className="font-sans text-muted">Empty repos, forks and tiny commits are discounted, and caps to stop them.</p>
+              </div>
+            </div>
+            <div className="border-t border-muted/20 py-5 flex gap-2">
+              <div>
+                <p className="font-display text-[2rem]">How often does it update?</p>
+                <p className="font-sans text-muted">[Refresh frequency]</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p className="text-orange font-mono font-semibold my-2">RANKS AND PRIVACY</p>
+          <div>
+            <div className="border-t border-muted/20 py-5 flex gap-2">
+              <div>
+                <p className="font-display text-[2rem]">How do ranks work?</p>
+                <p className="font-sans text-muted">No. Enter a username to preview. Sign up with Github to publish and edit.</p>
+              </div>
+            </div>
+            <div className="border-t border-muted/20 py-5 flex gap-2">
+              <div>
+                <p className="font-display text-[2rem]">What data do you read?</p>
+                <p className="font-sans text-muted">Private work only counts if you opt to share it with Github.</p>
+              </div>
+            </div>
+            <div className="border-t border-muted/20 py-5 flex gap-2">
+              <div>
+                <p className="font-display text-[2rem]">Can I delete my page and data?</p>
+                <p className="font-sans text-muted">Empty repos, forks and tiny commits are discounted, and caps to stop them.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 };
