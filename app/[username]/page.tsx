@@ -82,42 +82,42 @@ export default async function page({ params, }: { params: Promise<{ username: st
 
   
   return (
-    <div className="bg-cream h-full ">
+    <div className="bg-cream h-full max-lg:px-3">
       <div className="flex justify-between max-w-7xl items-center py-4 mx-auto">
         <Link href="/" className="flex gap-2 items-center cursor-pointer">
           <Image src={logo1} alt="Sailor logo" className="h-8 w-8 -mt-1.5 max-sm:h-8 max-sm:w-8" />
           <p className="font-display text-[2rem] max-sm:text-[1.8rem]">Sailor</p>
         </Link>
         <div className="px-3 py-2 rounded-full border border-muted/90 w-fit cursor-pointer">
-          <p className="text-[0.9rem]">Copy page link</p>
+          <p className="text-[0.9rem] max-sm:text-[0.8rem]">Copy page link</p>
         </div>
       </div>
       <div className="max-w-4xl mx-auto">
         <div>
-          <Image src={banner} alt="banner image" />
+          <Image src={banner} alt="banner image" className="max-sm:h-28 max-sm:object-cover max-sm:rounded-3xl" />
           <div className="ml-6 -mt-12">
-            <Image src={user.avatar_url} width={128} height={128} alt="The user's profile picture" className="h-32 w-32 rounded-full" />
+            <Image src={user.avatar_url} width={128} height={128} alt="The user's profile picture" className="h-32 w-32 rounded-full max-sm:h-24 max-sm:w-24 max-sm:border-4 max-sm:border-cream" />
           </div>
         </div>
-        <div className="flex justify-between items-end">
-          <div>
-            <p className="text-[2.5rem] font-display">{user.name}</p>
+        <div className="flex justify-between items-end max-sm:grid max-sm:grid-cols-1 max-sm:w-full max-sm:gap-3">
+          <div className="max-sm:w-full">
+            <p className="text-[2.5rem] font-display -mb-1">{user.name}</p>
             <div className="flex items-center gap-2 font-mono">
               <p>{user.login}</p>
               <div className="h-1 w-1 bg-black rounded-full"></div>
               <p>Fullstack Developer</p>
             </div>
           </div>
-          <div className="flex gap-3">
-            <div className="px-3 py-2 rounded-full bg-olive text-cream w-fit cursor-pointer">
-              <p className="text-[0.9rem]">Get in Touch</p>
+          <div className="flex gap-3 max-sm:w-full">
+            <div className="px-3 py-2 rounded-full bg-olive text-cream w-fit cursor-pointer max-sm:w-full max-sm:flex max-sm:justify-center max-sm:items-center">
+              <p className="text-[0.9rem] max-sm:text-[1.1rem]">Get in Touch</p>
             </div>
-            <Link href={user.html_url} className="px-3 py-2 rounded-full border border-muted/90 w-fit cursor-pointer">
-              <p className="text-[0.9rem]">View on Github</p>
+            <Link href={user.html_url} className="px-3 py-2 rounded-full border border-muted/90 w-fit cursor-pointer max-sm:w-full max-sm:flex max-sm:justify-center max-sm:items-center">
+              <p className="text-[0.9rem] max-sm:text-[1.1rem]">View on Github</p>
             </Link>
           </div>
         </div>
-        <div className="flex gap-8 my-4">
+        <div className="flex gap-8 my-4 max-sm:hidden">
           <div>
             <p className="text-[2rem] font-mono">{user.public_repos}</p>
             <p className="font-mono text-[0.9rem] text-muted">REPOS</p>
@@ -135,7 +135,25 @@ export default async function page({ params, }: { params: Promise<{ username: st
             <p className="font-mono text-[0.9rem] text-muted">DAYS STREAK</p>
           </div>
         </div>
-        <div className="grid grid-cols-[65%_35%] gap-6">
+        <div className="grid grid-cols-2 gap-4 sm:hidden my-6">
+          <div className="bg-card border border-muted/40 py-4 px-6 rounded-3xl">
+            <p className="text-[2rem] font-mono">{user.public_repos}</p>
+            <p className="font-mono text-[0.9rem] text-muted">REPOS</p>
+          </div>
+          <div className="bg-card border border-muted/40 py-4 px-6 rounded-3xl">
+            <p className="text-[2rem] font-mono">{user.followers}</p>
+            <p className="font-mono text-[0.9rem] text-muted">FOLLOWERS</p>
+          </div>
+          <div className="bg-card border border-muted/40 py-4 px-6 rounded-3xl">
+            <p className="text-[2rem] font-mono">{totalStars}</p>
+            <p className="font-mono text-[0.9rem] text-muted">STARS</p>
+          </div>
+          <div className="bg-card border border-muted/40 py-4 px-6 rounded-3xl">
+            <p className="text-[2rem] font-mono">00</p>
+            <p className="font-mono text-[0.9rem] text-muted">DAYS STREAK</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-[65%_35%] gap-6 max-sm:grid-cols-1">
           <div>
             <div className="border border-muted/20 px-8 py-6 rounded-2xl bg-card">
               <p className="font-mono text-orange text-[1rem] font-semibold mb-2">ABOUT</p>
@@ -181,14 +199,14 @@ export default async function page({ params, }: { params: Promise<{ username: st
         </div>
         <div className="my-16">
           <p className="font-mono text-orange text-[0.95rem] font-semibold">01 . SELECTED WORK</p>
-          <p className="text-[3rem] font-display">Thing I've built.</p>
+          <p className="text-[3rem] font-display max-sm:text-[2.5rem]">Thing I've built.</p>
           <p className="font-sans text-[0.95rem] text-muted">Pulled from most-starred and most-recent repositories.</p>
           <div className="grid gap-6 mt-12">
-            <div className="grid grid-cols-2 border border-muted/20 rounded-2xl bg-card">
-              <div className="bg-sky">
+            <div className="grid grid-cols-2 border border-muted/20 rounded-2xl bg-card max-sm:grid-cols-1">
+              <div className="bg-sky p-6 max-sm:h-42 max-sm:rounded-t-2xl">
 
               </div>
-              <div className="p-6">
+              <div className="p-6 max-sm:px-4">
                 <div className="bg-cream border border-muted/20 px-3 py-1.5 w-fit rounded-full flex items-center gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-3.5 w-4">
                     <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clipRule="evenodd" />
@@ -224,12 +242,12 @@ export default async function page({ params, }: { params: Promise<{ username: st
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-6 max-sm:grid-cols-1">
               <div className="grid grid-rows-2 border border-muted/20 rounded-2xl">
                 <div className="bg-pink-100 rounded-t-2xl">
 
                 </div>
-                <div className="p-6 bg-card rounded-b-2xl">
+                <div className="p-6 max-sm:px-4 bg-card rounded-b-2xl">
                   <div className="bg-cream border border-muted/20 px-3 py-1 w-fit rounded-full flex items-center gap-1">
                     <p className="text-[0.8rem]">Recent</p>
                   </div>
@@ -267,7 +285,7 @@ export default async function page({ params, }: { params: Promise<{ username: st
                 <div className="bg-amber-50 rounded-t-2xl">
 
                 </div>
-                <div className="p-6 bg-card rounded-b-2xl">
+                <div className="p-6 bg-card rounded-b-2xl max-sm:px-4">
                   <div className="bg-cream border border-muted/20 px-3 py-1 w-fit rounded-full flex items-center gap-1">
                     <p className="text-[0.8rem]">Recent</p>
                   </div>
@@ -314,7 +332,7 @@ export default async function page({ params, }: { params: Promise<{ username: st
         <div className="my-14">
           <p className="font-mono text-orange text-[0.95rem] font-semibold">02 . STACK & ACTIVITY</p>
           <p className="text-[3rem] font-display">How I work.</p>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-6 max-sm:grid-cols-1">
             <div className="bg-card border border-muted/20 rounded-2xl p-6">
               <p className="font-display text-[1.8rem]">Languages</p>
               <div className="grid gap-2 my-1">
@@ -375,47 +393,47 @@ export default async function page({ params, }: { params: Promise<{ username: st
         </div>
         <div className="my-14">
           <p className="font-mono text-orange text-[0.95rem] font-semibold">03 . JOURNEY</p>
-          <p className="text-[3rem] font-display">The path so far.</p>
-          <div className="grid grid-cols-4 relative gap-8 my-8">
-            <div className="grid gap-5">
-              <div className="relative flex items-center">
+          <p className="text-[3rem] font-display max-sm:text-[2.5rem]">The path so far.</p>
+          <div className="grid grid-cols-4 relative gap-8 my-8 max-sm:grid-cols-1 max-sm:gap-0">
+            <div className="grid gap-5 max-sm:flex ">
+              <div className="relative flex items-center max-sm:justify-center">
                 <span className="absolute top-0 z-2 left-0 w-3 h-3 rounded-full bg-olive" />
-                <span className="absolute top-1.5 z-1 left-0 h-px w-full bg-muted" />
+                <span className="absolute top-1.5 z-1 left-0 h-px w-full bg-muted max-sm:top-1 max-sm:left-1.5 max-sm:w-px max-sm:h-full" />
               </div>
-              <div className="leading-7">
+              <div className="leading-7 max-sm:pb-4">
                 <p className="text-muted font-mono text-[0.8rem] mt-2">{user.created_at.slice(0, 4)}</p>
                 <p className="text-[1.7rem] font-display">Joined Github</p>
                 <p className="text-muted font-sans">[Repo or detail]</p>
               </div>
             </div>
-            <div className="grid gap-5">
-              <div className="relative flex items-center">
+            <div className="grid gap-5 max-sm:flex">
+              <div className="relative flex items-center max-sm:justify-center">
                 <span className="absolute top-0 z-2 left-0 w-3 h-3 rounded-full bg-olive" />
-                <span className="absolute top-1.5 z-1 left-0 h-px w-full bg-muted" />
+                <span className="absolute top-1.5 z-1 left-0 h-px w-full bg-muted max-sm:top-1 max-sm:left-1.5 max-sm:w-px max-sm:h-full" />
               </div>
-              <div className="leading-7">
+              <div className="leading-7 max-sm:pb-4">
                 <p className="text-muted font-mono text-[0.8rem] mt-2">{oldestRepo[0].created_at.slice(0, 4)}</p>
                 <p className="text-[1.7rem] font-display">First Repository</p>
                 <p className="text-muted font-sans">{oldestRepo[0].name}</p>
               </div>
             </div>
-            <div className="grid gap-5">
-              <div className="relative flex items-center">
+            <div className="grid gap-5 max-sm:flex">
+              <div className="relative flex items-center max-sm:justify-center">
                 <span className="absolute top-0 z-2 left-0 w-3 h-3 rounded-full bg-olive" />
-                <span className="absolute top-1.5 z-1 left-0 h-px w-full bg-muted" />
+                <span className="absolute top-1.5 z-1 left-0 h-px w-full bg-muted max-sm:top-1 max-sm:left-1.5 max-sm:w-px max-sm:h-full" />
               </div>
-              <div className="leading-7">
+              <div className="leading-7 max-sm:pb-4">
                 <p className="text-muted font-mono text-[0.8rem] mt-2">{topRepos[0].created_at.slice(0, 4)}</p>
                 <p className="text-[1.7rem] font-display">Most Starred Project</p>
                 <p className="text-muted font-sans">{topRepos[0].name}</p>
               </div>
             </div>
-            <div className="grid gap-5">
-              <div className="relative flex items-center">
+            <div className="grid gap-5 max-sm:flex">
+              <div className="relative flex items-center max-sm:justify-center">
                 <span className="absolute top-0 z-2 left-0 w-3 h-3 rounded-full bg-olive" />
-                <span className="absolute top-1.5 z-1 left-0 h-px w-full bg-muted" />
+                <span className="absolute top-1.5 z-1 left-0 h-px w-full bg-muted max-sm:top-1 max-sm:left-1.5 max-sm:w-px max-sm:h-full" />
               </div>
-              <div className="leading-7">
+              <div className="leading-7 max-sm:pb-4">
                 <p className="text-muted font-mono text-[0.8rem] mt-2">{oldestRepo[oldestRepo.length - 1].created_at.slice(0, 4)}</p>
                 <p className="text-[1.7rem] font-display">Latest Work</p>
                 <p className="text-muted font-sans">{oldestRepo[oldestRepo.length - 1].name}</p>
@@ -423,9 +441,9 @@ export default async function page({ params, }: { params: Promise<{ username: st
             </div>
           </div>
         </div>
-        <div className="bg-olive-deep rounded-2xl py-8 px-12 flex justify-between items-center">
+        <div className="bg-olive-deep rounded-2xl py-8 px-12 flex justify-between items-center max-sm:p-6 max-sm:grid max-sm:grid-cols-1">
           <div className="grid">
-            <p className="text-[3rem] text-cream font-display justify-self-center">Find me <span className="italic">elsewhere.</span></p>
+            <p className="text-[3rem] text-cream font-display sm:justify-self-center max-sm:text-[2.75rem] ">Find me <span className="italic">elsewhere.</span></p>
             <div className="flex gap-2">
               <div className="text-cream border border-cream px-4 py-1.5 w-fit rounded-full cursor-pointer">
                 <p className="text-[0.8rem]">Website</p>
@@ -438,7 +456,7 @@ export default async function page({ params, }: { params: Promise<{ username: st
               </div>
             </div>
           </div>
-          <div className="bg-cream text-olive-deep px-4 py-2 rounded-full w-fit cursor-pointer">
+          <div className="bg-cream text-olive-deep px-4 py-2 rounded-full w-fit flex items-center justify-center cursor-pointer max-sm:py-2.5 max-sm:mt-4 max-sm:w-full">
             <p className="font-semibold">Get in touch</p>
           </div>
         </div>
