@@ -22,6 +22,7 @@ interface GithubRepo {
   description: string | null;
   stargazers_count: number;
   language: string;
+  fork: boolean;
   forks: number;
   homepage: string | null;
   html_url: string;
@@ -72,15 +73,30 @@ export default async function page({ params, }: { params: Promise<{ username: st
   console.log(repos)
   //Total number of stars logic
   let totalStars = 0
-  for (let i = 0; i<repos.length; i++) {
+  for (let i = 0; i < repos.length; i++) {
     totalStars += repos[i].stargazers_count
   }
   //Getting the top 3 repos
-  const topRepos = repos.sort((a, b) => b.stargazers_count - a.stargazers_count).slice(0,3)
+  const topRepos = repos.sort((a, b) => b.stargazers_count - a.stargazers_count).slice(0, 3)
   //Getting the first repo year
   const oldestRepo = [...repos].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
+  //getting the users languages
+  let lanRepos = repos.filter((repo) => repo.fork !== true)
+  const languages: { [key: string]: number } = {}
+  for (let i = 0; i < lanRepos.length; i++) {
+    let loopLang = lanRepos[i].language
+    if (loopLang == null) {
+      continue
+    } else if (!languages.hasOwnProperty(loopLang)) {
+      languages[loopLang] = 1
+    } else {
+      languages[loopLang]++
+    }
+  }
 
-  
+  const total = Object.values(languages).reduce((sum, n) => sum + n, 0)
+
+
   return (
     <div className="bg-cream h-full max-lg:px-3">
       <div className="flex justify-between max-w-7xl items-center py-4 mx-auto">
@@ -335,7 +351,18 @@ export default async function page({ params, }: { params: Promise<{ username: st
           <div className="grid grid-cols-2 gap-6 max-sm:grid-cols-1">
             <div className="bg-card border border-muted/20 rounded-2xl p-6">
               <p className="font-display text-[1.8rem]">Languages</p>
-              <div className="grid gap-2 my-1">
+              {Object.entries(languages).sort((x, y) => y[1] - x[1]).slice(0, 5).map(([language, count]) => (
+                <div className="grid gap-2 my-1">
+                  <div className="flex justify-between text-muted items-center">
+                    <p>{language}</p>
+                    <p>{(count / total * 100).toFixed(2)}</p>
+                  </div>
+                  <div className="h-2 bg-gray-300 rounded-full">
+                    <div className="bg-orange h-2 rounded-full" style={{width: `${(count / total * 100)}%`}}></div>
+                  </div>
+                </div>
+              ))}
+              {/**<div className="grid gap-2 my-1">
                 <div className="flex justify-between text-muted items-center">
                   <p>[Languages 1]</p>
                   <p>[00%]</p>
@@ -343,34 +370,7 @@ export default async function page({ params, }: { params: Promise<{ username: st
                 <div className="h-2 bg-gray-300 rounded-full">
                   <div className="bg-orange h-2 w-[70%] rounded-full"></div>
                 </div>
-              </div>
-              <div className="grid gap-2 my-1">
-                <div className="flex justify-between text-muted items-center">
-                  <p>[Languages 2]</p>
-                  <p>[00%]</p>
-                </div>
-                <div className="h-2 bg-gray-300 rounded-full">
-                  <div className="bg-olive h-2 w-[49%] rounded-full"></div>
-                </div>
-              </div>
-              <div className="grid gap-2 my-1">
-                <div className="flex justify-between text-muted items-center">
-                  <p>[Languages 3]</p>
-                  <p>[00%]</p>
-                </div>
-                <div className="h-2 bg-gray-300 rounded-full">
-                  <div className="bg-olive h-2 w-[37%] rounded-full"></div>
-                </div>
-              </div>
-              <div className="grid gap-2 my-1">
-                <div className="flex justify-between text-muted items-center">
-                  <p>[Languages 4]</p>
-                  <p>[00%]</p>
-                </div>
-                <div className="h-2 bg-gray-300 rounded-full">
-                  <div className="bg-olive h-2 w-[12%] rounded-full"></div>
-                </div>
-              </div>
+              </div> */}
             </div>
             <div className="bg-card border border-muted/20 rounded-2xl p-6">
               <p className="font-display text-[1.8rem]">Activity, last 12 months</p>
