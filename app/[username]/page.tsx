@@ -154,6 +154,8 @@ export default async function page({ params, }: { params: Promise<{ username: st
   //fetching the contributions
   const contributions = await getActivity(username);
   const maxContributions = Math.max(...Object.values(contributions));
+  console.log(contributions)
+  console.log(maxContributions)
   
 
   return (
@@ -433,9 +435,9 @@ export default async function page({ params, }: { params: Promise<{ username: st
             </div>
             <div className="bg-card border border-muted/20 rounded-2xl p-6 max-sm:p-4">
               <p className="font-display text-[1.8rem]">Activity, last 12 months</p>
-              <div className="grid grid-cols-12 gap-3 items-end max-sm:gap-1.5">
+              <div className="grid grid-cols-12 gap-3 h-48 items-end max-sm:gap-1.5">
                 {Object.values(contributions).map((count, index) => (
-                  <div key={index} style={{ height: `${(count / maxContributions * 100)}%` }} className="bg-muted/20 rounded-md"></div>
+                  <div key={index} style={{ height: `${(count / maxContributions * 100)}%` }} className={`${count / maxContributions * 100 > 70 ? `bg-orange` : count / maxContributions * 100 < 30 ? `bg-muted/50` : `bg-olive`} rounded-md`}></div>
                 ))}
               </div>
               {/**<div className="grid grid-cols-12 gap-3 items-end max-sm:gap-1.5">
