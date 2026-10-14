@@ -15,6 +15,7 @@ interface GitHubUser {
   blog: string | null;
   html_url: string;
   created_at: string;
+  company: string;
 }
 
 interface GithubRepo {
@@ -53,6 +54,61 @@ async function getRepos(username: string): Promise<GithubRepo[]> {
   const repos = await res.json()
   console.log(repos)
   return repos
+}
+
+async function getActivity(username: string) {
+  console.log("Function started", username);
+  const today = new Date();
+
+  const fromDate = new Date(today);
+  fromDate.setMonth(today.getMonth() - 11);
+
+  const toDate = today;
+  const query = `
+  query {
+    user(login: "${username}") {
+      contributionsCollection(
+        from: "${fromDate.toISOString()}"
+        to: "${toDate.toISOString()}"
+      ) {
+        contributionCalendar {
+          totalContributions
+          weeks {
+            contributionDays {
+              date
+              contributionCount
+            }
+          }
+        }
+      }
+    }
+  }
+`
+  const response = await fetch("https://api.github.com/graphql", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      query
+    })
+  })
+  const data = await response.json();
+  const weeks = data.data.user.contributionsCollection.contributionCalendar.weeks;
+  const contributions: Record<string, number> = {};
+  for (const week of weeks) {
+    for (const day of week.contributionDays) {
+      const month = new Date(day.date).toLocaleDateString("en-US", {
+        month: "long",
+        year: "numeric",
+        timeZone: "UTC",
+      });
+      contributions[month] =
+        (contributions[month] || 0) + day.contributionCount;
+    }
+  }
+  return contributions;
 }
 
 export default async function page({ params, }: { params: Promise<{ username: string }>; }) {
@@ -95,7 +151,10 @@ export default async function page({ params, }: { params: Promise<{ username: st
   }
 
   const total = Object.values(languages).reduce((sum, n) => sum + n, 0)
-
+  //fetching the contributions
+  const contributions = await getActivity(username);
+  const maxContributions = Math.max(...Object.values(contributions));
+  
 
   return (
     <div className="bg-cream h-full max-lg:px-3">
@@ -179,7 +238,7 @@ export default async function page({ params, }: { params: Promise<{ username: st
                   <p className="text-[0.8rem] max-sm:text-[0.7rem]">{user.location}</p>
                 </div>
                 <div className="border border-muted/20 py-1 px-3 rounded-2xl w-fit bg-cream">
-                  <p className="text-[0.8rem] max-sm:text-[0.7rem]">[Company]</p>
+                  <p className="text-[0.8rem] max-sm:text-[0.7rem]">{user.company || "Self Employed"}</p>
                 </div>
                 <div className="border border-muted/20 py-1 px-3 rounded-2xl w-fit bg-cream">
                   <p className="text-[0.8rem] whitespace-nowrap max-sm:text-[0.7rem]">Open to Work</p>
@@ -355,10 +414,10 @@ export default async function page({ params, }: { params: Promise<{ username: st
                 <div className="grid gap-2 my-1">
                   <div className="flex justify-between text-muted items-center">
                     <p>{language}</p>
-                    <p>{(count / total * 100).toFixed(2)}</p>
+                    <p>{(count / total * 100).toFixed(1)}%</p>
                   </div>
                   <div className="h-2 bg-gray-300 rounded-full">
-                    <div className="bg-orange h-2 rounded-full" style={{width: `${(count / total * 100)}%`}}></div>
+                    <div className="bg-orange h-2 rounded-full" style={{ width: `${(count / total * 100)}%` }}></div>
                   </div>
                 </div>
               ))}
@@ -372,9 +431,14 @@ export default async function page({ params, }: { params: Promise<{ username: st
                 </div>
               </div> */}
             </div>
-            <div className="bg-card border border-muted/20 rounded-2xl p-6">
+            <div className="bg-card border border-muted/20 rounded-2xl p-6 max-sm:p-4">
               <p className="font-display text-[1.8rem]">Activity, last 12 months</p>
-              <div className="grid grid-cols-12 gap-3 items-end">
+              <div className="grid grid-cols-12 gap-3 items-end max-sm:gap-1.5">
+                {Object.values(contributions).map((count, index) => (
+                  <div key={index} style={{ height: `${(count / maxContributions * 100)}%` }} className="bg-muted/20 rounded-md"></div>
+                ))}
+              </div>
+              {/**<div className="grid grid-cols-12 gap-3 items-end max-sm:gap-1.5">
                 <div className="h-16 bg-muted/20 rounded-md"></div>
                 <div className="h-15 bg-muted/20 rounded-md"></div>
                 <div className="h-7 bg-muted/20 rounded-md"></div>
@@ -387,7 +451,7 @@ export default async function page({ params, }: { params: Promise<{ username: st
                 <div className="h-40 bg-orange rounded-md"></div>
                 <div className="h-14 bg-olive rounded-md"></div>
                 <div className="h-28 bg-orange rounded-md"></div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
