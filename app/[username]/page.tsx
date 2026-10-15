@@ -156,6 +156,37 @@ export default async function page({ params, }: { params: Promise<{ username: st
   const maxContributions = Math.max(...Object.values(contributions));
   console.log(contributions)
   console.log(maxContributions)
+  //Total contributions
+  let totalContribution = 0
+  for (let i=0; i<Object.values(contributions).length; i++) {
+    totalContribution += Object.values(contributions)[i]
+  }
+  //Sailor score logic
+  //Total stars which takes 30% of the score the cap is 100 stars
+  let sailorStar = totalStars / 100 * 300 > 300 ? 300 : totalStars / 100 * 300
+  //Total contributions which takes 25% of the score max is 600 contributions per year
+  let sailorContribution = totalContribution / 600 * 250 > 250 ? 250 : totalContribution / 600 * 250
+  //Followers which takes 20% of the score max is 200
+  let sailorFollowers = user.followers / 200 * 200 > 200 ? 200 : user.followers / 200 * 200
+  //Public repos which takes 10% of the score max is 100 repos
+  let sailorRepo = user.public_repos / 100 * 100 > 100 ? 100 : user.public_repos / 100 * 100
+  //Account Age which takes 7.5% of the score max is 10 yrs old
+  let thisYr = new Date().getFullYear() 
+  let accYr = Number(user.created_at.slice(0,4))
+  let accAge = thisYr - accYr
+  let sailorAge = accAge / 10 * 75 > 75 ? 75 : accAge / 10 * 75
+  //Consistency which takes 7.5% of the score max is 12 obviously 
+  let consistentMth = 0
+  for (let i=0; i<Object.values(contributions).length; i++) {
+    if (Object.values(contributions)[i] > 0) {
+      consistentMth++
+    }
+  }
+  let consistency = consistentMth / 12 * 75 > 75 ? 75 : consistentMth / 12 * 75
+  //Final sailor score calculation
+  let sailorScore = sailorStar + sailorContribution + sailorFollowers + sailorRepo + sailorAge + consistency
+
+
   
 
   return (
@@ -258,12 +289,12 @@ export default async function page({ params, }: { params: Promise<{ username: st
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-[28px] font-semibold text-cream font-mono">
-                    000
+                    {sailorScore.toFixed(0)}
                   </span>
                 </div>
               </div>
               <div className="bg-cream text-ink w-fit px-6 py-1.5 rounded-full justify-self-center">
-                <p>Voyager</p>
+                <p>{sailorScore < 250 ? "Deckhand" : sailorScore < 500 ? "Mariner" : sailorScore < 750 ? "Navigator" : "Voyager"}</p>
               </div>
               <div className="flex gap-1 justify-self-center items-center hover:gap-2 transition-all cursor-pointer">
                 <p className="text-cream text-[0.8rem] my-2">How is this calculated?</p>
