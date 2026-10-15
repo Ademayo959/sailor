@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import logo1 from "@/assets/logo-without-bg.png"
 import banner from "@/assets/profile-banner.png"
+import CopyLink from "@/components/CopyLink"
 
 interface GitHubUser {
   login: string;
@@ -185,8 +186,10 @@ export default async function page({ params, }: { params: Promise<{ username: st
   let consistency = consistentMth / 12 * 75 > 75 ? 75 : consistentMth / 12 * 75
   //Final sailor score calculation
   let sailorScore = sailorStar + sailorContribution + sailorFollowers + sailorRepo + sailorAge + consistency
+  //Months array
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-
+ 
   
 
   return (
@@ -196,9 +199,10 @@ export default async function page({ params, }: { params: Promise<{ username: st
           <Image src={logo1} alt="Sailor logo" className="h-8 w-8 -mt-1.5 max-sm:h-8 max-sm:w-8" />
           <p className="font-display text-[2rem] max-sm:text-[1.8rem]">Sailor</p>
         </Link>
-        <div className="px-3 py-2 rounded-full border border-muted/90 w-fit cursor-pointer">
-          <p className="text-[0.9rem] max-sm:text-[0.8rem]">Copy page link</p>
-        </div>
+        <CopyLink username={username} />
+        {/**<div className="px-3 py-2 rounded-full border border-muted/90 w-fit cursor-pointer">
+          <p className="text-[0.9rem] max-sm:text-[0.8rem]">{"Copy page link"}</p>
+        </div> */}
       </div>
       <div className="max-w-4xl mx-auto">
         <div>
@@ -239,8 +243,8 @@ export default async function page({ params, }: { params: Promise<{ username: st
             <p className="font-mono text-[0.9rem] text-muted">STARS</p>
           </div>
           <div>
-            <p className="text-[2rem] font-mono">00</p>
-            <p className="font-mono text-[0.9rem] text-muted">DAYS STREAK</p>
+            <p className="text-[2rem] font-mono">{totalContribution}</p>
+            <p className="font-mono text-[0.9rem] text-muted">CONTRIBUTIONS</p>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4 sm:hidden my-6">
@@ -285,7 +289,7 @@ export default async function page({ params, }: { params: Promise<{ username: st
               <div className="relative h-[140px] w-[140px] justify-self-center my-2">
                 <svg className="-rotate-90" width="140" height="140" viewBox="0 0 220 220">
                   <circle cx="110" cy="110" r="85" fill="none" stroke="#4A5236" strokeWidth="18" />
-                  <circle cx="110" cy="110" r="85" fill="none" stroke="#FDBA8C" strokeWidth="18" strokeLinecap="round" strokeDasharray="534" strokeDashoffset="130" />
+                  <circle cx="110" cy="110" r="85" fill="none" stroke="#FDBA8C" strokeWidth="18" strokeLinecap="round" strokeDasharray="534" strokeDashoffset={`${(1 - sailorScore / 1000) * 534}`} />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-[28px] font-semibold text-cream font-mono">
@@ -500,7 +504,7 @@ export default async function page({ params, }: { params: Promise<{ username: st
               <div className="leading-7 max-sm:pb-4">
                 <p className="text-muted font-mono text-[0.8rem] mt-2">{user.created_at.slice(0, 4)}</p>
                 <p className="text-[1.7rem] font-display">Joined Github</p>
-                <p className="text-muted font-sans">[Repo or detail]</p>
+                <p className="text-muted font-sans">{months[Number(user.created_at.slice(5,7))]}</p>
               </div>
             </div>
             <div className="grid gap-5 max-sm:flex">
@@ -542,9 +546,9 @@ export default async function page({ params, }: { params: Promise<{ username: st
           <div className="grid">
             <p className="text-[3rem] text-cream font-display sm:justify-self-center max-sm:text-[2.75rem] ">Find me <span className="italic">elsewhere.</span></p>
             <div className="flex gap-2">
-              <div className="text-cream border border-cream px-4 py-1.5 w-fit rounded-full cursor-pointer">
+              <Link href={user.blog || "https://google.com"} className="text-cream border border-cream px-4 py-1.5 w-fit rounded-full cursor-pointer">
                 <p className="text-[0.8rem]">Website</p>
-              </div>
+              </Link>
               <div className="text-cream border border-cream px-4 py-1.5 w-fit rounded-full cursor-pointer">
                 <p className="text-[0.8rem]">Email</p>
               </div>
