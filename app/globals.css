@@ -15,4 +15,8 @@
   --color-sky: #D9E6EC;
 }
 
+.hero-text {
+    display: grid;
+    place-items: center;
+}
 
