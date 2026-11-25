@@ -1,22 +1,85 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-instrument-serif);
+	--font-sans: var(--font-geist-sans);
+	--font-mono: var(--font-geist-mono);
+	--font-display: var(--font-instrument-serif);
 
-  --color-cream: #F4EFE4;
-  --color-card: #FBF8F2;
-  --color-ink: #23261A;
-  --color-muted: #6B6756;
-  --color-orange: #C2491D;
-  --color-olive: #4F5D2F;
-  --color-olive-deep: #2F3A1E;
-  --color-sky: #D9E6EC;
+	--color-cream: var(--theme-cream);
+	--color-card: var(--theme-card);
+	--color-ink: var(--theme-ink);
+	--color-muted: var(--theme-muted);
+	--color-orange: var(--theme-orange);
+	--color-olive: var(--theme-olive);
+	--color-olive-deep: var(--theme-olive-deep);
+	--color-sky: var(--theme-sky);
+}
+
+:root {
+	color-scheme: light;
+	--theme-cream: #f4efe4;
+	--theme-card: #fbf8f2;
+	--theme-ink: #23261a;
+	--theme-muted: #6b6756;
+	--theme-orange: #c2491d;
+	--theme-olive: #4f5d2f;
+	--theme-olive-deep: #2f3a1e;
+	--theme-sky: #d9e6ec;
+	--pattern-dot: #d8cfbb;
+}
+
+:root[data-theme="dark"] {
+	color-scheme: dark;
+	--theme-cream: #171914;
+	--theme-card: #20231c;
+	--theme-ink: #f0eadc;
+	--theme-muted: #b0aa99;
+	--theme-orange: #ed9a70;
+	--theme-olive: #879a5f;
+	--theme-olive-deep: #293121;
+	--theme-sky: #29383b;
+	--pattern-dot: #42483b;
+}
+
+body {
+	background-color: var(--color-cream);
+	color: var(--color-ink);
 }
 
 .hero-text {
-    display: grid;
-    place-items: center;
+	display: grid;
+	place-items: center;
 }
 
+.page-grid {
+	background-image: radial-gradient(var(--pattern-dot) 1px, transparent 1px);
+	background-size: 22px 22px;
+}
+
+.mode-toggle {
+	position: absolute;
+	top: 30px;
+	right: 45px;
+	padding: 12px 15px;
+	border-radius: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--color-ink);
+
+	i {
+		font-size: 1.3em;
+	}
+}
+
+.mode-toggle-inline {
+	position: static;
+	padding: 8px 10px;
+}
+
+@media (max-width: 760px) {
+	.mode-toggle {
+		top: 80px;
+		right: 10px;
+	}
+}

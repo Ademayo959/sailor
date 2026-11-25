@@ -3,7 +3,7 @@ export default function page() {
   return (
     <div className="bg-cream h-full">
       <Navbar />
-      <div className="bg-[radial-gradient(#D8CFBB_1px,transparent_1px)] bg-[size:22px_22px] px-6 py-16 text-center max-sm:px-2">
+      <div className="page-grid px-6 py-16 text-center max-sm:px-2">
         <div className="bg-card border border-muted/50 w-fit px-4 rounded-full py-1 justify-self-center mb-4 cursor-pointer">
           <p className="text-ink/80 text-[0.8rem] font-semibold font-sans">FAQS</p>
         </div>

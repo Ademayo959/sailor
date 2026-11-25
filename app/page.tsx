@@ -20,7 +20,7 @@ export default function Home() {
   return (
 		<div className="bg-cream h-full">
 			<Navbar />
-			<div className="bg-[radial-gradient(#D8CFBB_1px,transparent_1px)] bg-[size:22px_22px] px-6 py-16 text-center max-sm:px-2 hero-text">
+			<div className="page-grid px-6 py-16 text-center max-sm:px-2 hero-text">
 				<div className="bg-card border border-muted/50 w-fit px-4 rounded-full py-1 justify-self-center mb-4 cursor-pointer ">
 					<p className="text-ink/80 text-[0.8rem] font-semibold font-sans">
 						Free for Student developers
@@ -53,7 +53,7 @@ export default function Home() {
 						<button
 							onClick={goToProfile}
 							disabled={!username.trim()}
-							className="bg-olive w-fit px-5 py-2 text-white rounded-full cursor-pointer max-sm:px-3 max-sm:py-1 flex items-center"
+							className="bg-olive w-fit px-5 py-2 text-cream rounded-full cursor-pointer max-sm:px-3 max-sm:py-1 flex items-center"
 						>
 							<p className="font-sans max-sm:text-[0.8rem] whitespace-nowrap">
 								See my Sailor profile
@@ -113,7 +113,7 @@ export default function Home() {
 								cy="110"
 								r="85"
 								fill="none"
-								stroke="#e8e2d3"
+								stroke="var(--theme-card)"
 								strokeWidth="18"
 							/>
 							<circle
@@ -121,7 +121,7 @@ export default function Home() {
 								cy="110"
 								r="85"
 								fill="none"
-								stroke="#C2491D"
+								stroke="var(--theme-orange)"
 								strokeWidth="18"
 								strokeLinecap="round"
 								strokeDasharray="534"
@@ -288,7 +288,7 @@ export default function Home() {
 							<p className="text-[2.6rem] font-display my-2 justify-self-center">
 								Book a Call
 							</p>
-							<div className="bg-ink justify-self-center flex px-6 text-white h-12 w-fit rounded-full items-center cursor-pointer transition-all duration-500 hover:bg-card hover:border hover:border-ink hover:text-ink">
+							<div className="bg-ink justify-self-center flex px-6 text-cream h-12 w-fit rounded-full items-center cursor-pointer transition-all duration-500 hover:bg-card hover:border hover:border-ink hover:text-ink">
 								<p>Get in Touch</p>
 							</div>
 						</div>
@@ -316,8 +316,8 @@ export default function Home() {
 						<p className="font-mono text-muted">[500-749]</p>
 						<p className="font-display text-[2.5rem]">Navigator</p>
 					</div>
-					<div className="bg-ink text-white border border-muted/20 p-5 rounded-2xl">
-						<p className="font-mono text-white/70">
+					<div className="bg-ink text-cream border border-muted/20 p-5 rounded-2xl">
+						<p className="font-mono text-cream/70">
 							[750 and above]
 						</p>
 						<p className="font-display text-[2.5rem]">Voyager</p>
@@ -359,7 +359,7 @@ export default function Home() {
 				</div>
 				<Link
 					href="/scoring"
-					className="bg-olive inline-block px-6 py-3 cursor-pointer text-white w-fit rounded-full justify-self-center"
+					className="bg-olive inline-block px-6 py-3 cursor-pointer text-cream w-fit rounded-full justify-self-center"
 				>
 					<p>Read how scoring works</p>
 				</Link>
@@ -412,10 +412,10 @@ export default function Home() {
 				<div className="bg-card max-w-2xl mt-6 pl-6 py-2 pr-2 h-14 shadow-md justify-between flex rounded-full mx-auto my-3 max-sm:pl-4 max-sm:h-12">
 					<input
 						type="text"
-						placeholder="github.com/ username"
+						placeholder="github.com/username"
 						className="w-[70%] font-sans outline-0 placeholder:text-muted max-sm:w-full"
 					/>
-					<div className="bg-olive w-fit px-5 py-2 text-white rounded-full cursor-pointer max-sm:px-3 max-sm:py-1 flex items-center">
+					<div className="bg-olive w-fit px-5 py-2 text-cream rounded-full cursor-pointer max-sm:px-3 max-sm:py-1 flex items-center">
 						<p className="font-sans max-sm:text-[0.8rem] whitespace-nowrap">
 							See my Sailor profile
 						</p>
