@@ -6,7 +6,7 @@ export default function page() {
   return (
     <div className="bg-cream h-full">
       <Navbar />
-      <div className="bg-[radial-gradient(#D8CFBB_1px,transparent_1px)] bg-[size:22px_22px] px-6 py-16 text-center max-sm:px-2">
+      <div className="page-grid px-6 py-16 text-center max-sm:px-2">
         <div className="bg-card border border-muted/50 w-fit px-4 rounded-full py-1 justify-self-center mb-4 cursor-pointer">
           <p className="text-ink/80 text-[0.8rem] font-semibold font-sans">How scoring works</p>
         </div>
@@ -102,8 +102,8 @@ export default function page() {
             <p className="font-mono text-muted">[500-749]</p>
             <p className="font-display text-[2.5rem]">Navigator</p>
           </div>
-          <div className="bg-ink text-white border border-muted/20 p-5 rounded-2xl">
-            <p className="font-mono text-white/70">[750 and above]</p>
+          <div className="bg-ink text-cream border border-muted/20 p-5 rounded-2xl">
+            <p className="font-mono text-cream/70">[750 and above]</p>
             <p className="font-display text-[2.5rem]">Voyager</p>
           </div>
         </div>
@@ -111,7 +111,7 @@ export default function page() {
       </div>
       <div className="bg-olive-deep max-w-7xl py-12 px-24 mx-auto rounded-4xl max-lg:mx-6 max-sm:px-4 max-sm:py-8 max-sm:mx-3">
         <p className="text-[4rem] font-display justify-self-center my-6 text-white max-sm:text-[3.5rem] max-sm:leading-15">Find your rank, <span className="italic">Share your page.</span></p>
-        <div className="bg-card px-6 py-3 cursor-pointer text-olive-deep w-fit rounded-full justify-self-center">
+        <div className="bg-card px-6 py-3 cursor-pointer text-ink w-fit rounded-full justify-self-center">
           <p>See my sailor score</p>
         </div>
       </div>

@@ -3,6 +3,7 @@ import Link from "next/link"
 import logo1 from "@/assets/logo-without-bg.png"
 import banner from "@/assets/profile-banner.png"
 import CopyLink from "@/components/CopyLink"
+import ThemeToggle from "@/components/ThemeToggle"
 
 interface GitHubUser {
   login: string;
@@ -199,7 +200,10 @@ export default async function page({ params, }: { params: Promise<{ username: st
           <Image src={logo1} alt="Sailor logo" className="h-8 w-8 -mt-1.5 max-sm:h-8 max-sm:w-8" />
           <p className="font-display text-[2rem] max-sm:text-[1.8rem]">Sailor</p>
         </Link>
-        <CopyLink username={username} />
+        <div className="flex items-center gap-3">
+          <CopyLink username={username} />
+          <ThemeToggle inline />
+        </div>
         {/**<div className="px-3 py-2 rounded-full border border-muted/90 w-fit cursor-pointer">
           <p className="text-[0.9rem] max-sm:text-[0.8rem]">{"Copy page link"}</p>
         </div> */}
@@ -288,8 +292,8 @@ export default async function page({ params, }: { params: Promise<{ username: st
               <p className="font-mono text-cream">SAILOR SCORE</p>
               <div className="relative h-[140px] w-[140px] justify-self-center my-2">
                 <svg className="-rotate-90" width="140" height="140" viewBox="0 0 220 220">
-                  <circle cx="110" cy="110" r="85" fill="none" stroke="#4A5236" strokeWidth="18" />
-                  <circle cx="110" cy="110" r="85" fill="none" stroke="#FDBA8C" strokeWidth="18" strokeLinecap="round" strokeDasharray="534" strokeDashoffset={`${(1 - sailorScore / 1000) * 534}`} />
+                  <circle cx="110" cy="110" r="85" fill="none" stroke="var(--theme-olive)" strokeWidth="18" />
+                  <circle cx="110" cy="110" r="85" fill="none" stroke="var(--theme-orange)" strokeWidth="18" strokeLinecap="round" strokeDasharray="534" strokeDashoffset={`${(1 - sailorScore / 1000) * 534}`} />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-[28px] font-semibold text-cream font-mono">
@@ -544,20 +548,20 @@ export default async function page({ params, }: { params: Promise<{ username: st
         </div>
         <div className="bg-olive-deep rounded-2xl py-8 px-12 flex justify-between items-center max-sm:p-6 max-sm:grid max-sm:grid-cols-1">
           <div className="grid">
-            <p className="text-[3rem] text-cream font-display sm:justify-self-center max-sm:text-[2.75rem] ">Find me <span className="italic">elsewhere.</span></p>
+            <p className="text-[3rem] text-white font-display sm:justify-self-center max-sm:text-[2.75rem] ">Find me <span className="italic">elsewhere.</span></p>
             <div className="flex gap-2">
-              <Link href={user.blog || "https://google.com"} className="text-cream border border-cream px-4 py-1.5 w-fit rounded-full cursor-pointer">
+              <Link href={user.blog || "https://google.com"} className="text-white border border-white px-4 py-1.5 w-fit rounded-full cursor-pointer">
                 <p className="text-[0.8rem]">Website</p>
               </Link>
-              <div className="text-cream border border-cream px-4 py-1.5 w-fit rounded-full cursor-pointer">
+              <div className="text-white border border-white px-4 py-1.5 w-fit rounded-full cursor-pointer">
                 <p className="text-[0.8rem]">Email</p>
               </div>
-              <div className="text-cream border border-cream px-4 py-1.5 w-fit rounded-full cursor-pointer">
+              <div className="text-white border border-white px-4 py-1.5 w-fit rounded-full cursor-pointer">
                 <p className="text-[0.8rem]">LinkedIn</p>
               </div>
             </div>
           </div>
-          <div className="bg-cream text-olive-deep px-4 py-2 rounded-full w-fit flex items-center justify-center cursor-pointer max-sm:py-2.5 max-sm:mt-4 max-sm:w-full">
+          <div className="bg-cream text-ink px-4 py-2 rounded-full w-fit flex items-center justify-center cursor-pointer max-sm:py-2.5 max-sm:mt-4 max-sm:w-full">
             <p className="font-semibold">Get in touch</p>
           </div>
         </div>
